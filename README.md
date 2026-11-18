@@ -1,6 +1,10 @@
 # Token Radar
 
-A token launch radar over the sealed DefiLlama snapshot, built for make.fun's “Build the best token launch radar” bounty. The snapshot dated 2026-11-14 yields 198 ranked protocols and covers all 40 watchlist entries. Implied launch values describe the snapshot; they do not promise a token launch.
+[![make.fun · token-radar-01](https://make.fun/badge/token-radar-01.svg)](https://make.fun/bounty/token-radar-01)
+[![rank](https://make.fun/badge/token-radar-01/gittoshigit/token-radar-01/rank.svg)](https://make.fun/bounty/token-radar-01)
+[![reward](https://make.fun/badge/token-radar-01/gittoshigit/token-radar-01/reward.svg)](https://make.fun/bounty/token-radar-01)
+
+A token launch radar over the sealed DefiLlama snapshot, built for make.fun's [“Build the best token launch radar” bounty](https://make.fun/bounty/token-radar-01). The snapshot dated 2026-11-14 yields 198 ranked protocols and covers all 40 watchlist entries. Implied launch values describe the snapshot; they do not promise a token launch.
 
 Run with Node.js supporting native TypeScript (Node 22.18+):
 
