@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Token Radar · peer-1</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header><span class="radar" aria-hidden="true"></span><h1>Token Radar</h1><p id="summary">Loading snapshot…</p></header>
+<main><p id="reproduced" role="status">Recomputing model…</p>
+<p>Implied launch values for protocols that record no token. Values describe a launch if the record stays as it is; they do not predict issuance.</p>
+<div class="table-wrap"><table><caption>Eligible pre-token universe · snapshot model peer-1</caption><thead><tr><th scope="col">Rank</th><th scope="col">Protocol</th><th scope="col">Category</th><th scope="col">TVL</th><th scope="col">Implied value</th></tr></thead><tbody id="board"></tbody></table></div>
+</main>
+<script src="../data.js"></script>
+<script src="model.js"></script>
+<script src="plans.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
