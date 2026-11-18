@@ -3,15 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Token Radar · peer-1</title>
+<title>Token Radar · launch value evidence</title>
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<header><span class="radar" aria-hidden="true"></span><h1>Token Radar</h1><p id="summary">Loading snapshot…</p></header>
-<main><p id="reproduced" role="status">Recomputing model…</p>
-<p>Implied launch values for protocols that record no token. Values describe a launch if the record stays as it is; they do not predict issuance.</p>
-<div class="table-wrap"><table><caption>Eligible pre-token universe · snapshot model peer-1</caption><thead><tr><th scope="col">Rank</th><th scope="col">Protocol</th><th scope="col">Category</th><th scope="col">TVL</th><th scope="col">Implied value</th></tr></thead><tbody id="board"></tbody></table></div>
-</main>
+<header class="masthead"><a class="brand" href="#/"><span class="radar" aria-hidden="true"></span><span>Token Radar<small>LAUNCH VALUE / SNAPSHOT EVIDENCE</small></span></a><nav aria-label="Primary"><a href="#/">Board</a><a href="#/live">Trading tokens</a><a href="#/method">Methodology</a></nav></header>
+<div class="status"><span id="summary">Loading snapshot…</span><span id="reproduced" role="status">Recomputing model…</span></div>
+<main id="app" tabindex="-1"></main>
+<footer>Implied value describes a launch if the record stays as it is. It does not predict token issuance.</footer>
 <script src="../data.js"></script>
 <script src="model.js"></script>
 <script src="plans.js"></script>

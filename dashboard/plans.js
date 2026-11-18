@@ -65,6 +65,36 @@ function planFor(p) {
   add(`Deposit ${dollars(K)} into ${N}'s checked vault on ${C}, or half that if its withdrawal delay exceeds 7 days`,2*g,5);
   add(`Check ${N}'s vault share price weekly against the entry price of the ${dollars(K)} position and record changes`,0,5*w,'5 min/week');
   hold('. Request withdrawal early enough for the queue');break;
+ case 'RWA':
+  add(`Complete ${N}'s onboarding or KYC if the product asks for it on ${C}`,0,30,'1–3 days (30 active min)','free');
+  add(`Mint or subscribe ${dollars(K)} of ${N}'s tokenised asset on ${C}, minding the minimum ticket`,2*g,15,undefined,tx(2)+' + issuer fee shown at mint (not included in estimate)');
+  add(`Note ${N}'s redemption window and its notice period for the ${dollars(K)} asset in the log`,0,5);
+  add(`Hold ${dollars(K)} of ${N}'s asset for ${H} days and check the stated NAV each week`,0,5*w,`${H} days; 5 min/week`);
+  add(`Redeem the ${dollars(K)} asset through ${N}'s issuer window, not a thin DEX pool`,g,15,'1–5 days (15 active min)');break;
+ case 'Derivatives':
+  add(`Deposit ${dollars(K)} USDC as margin on ${N} on ${C}`,2*g,10);
+  if(/perp/i.test(N)) {
+   add(`Place maker limit orders on one major pair on ${N} at 2× leverage at most; aim for about ${dollars(5*K)} weekly volume`,0.001*K*w,15*w,'15 min/week',`about 0.02% × volume = ${dollars(0.001*K)}/week; maker assumption 0–0.02%`);
+   add(`Close each ${N} position the same day so funding does not pile up; budget closes for ${dollars(5*K)} weekly notional`,0.0025*K*w,5*w,'5 min/week','0.05% on close; taker assumption 0.035–0.06% of notional');
+   add(`Keep at least 50% of ${dollars(K)} margin unused on ${N}; check funding before each order and never hold through a funding spike`,0,5*w,'5 min/week');
+  } else {
+   add(`Buy one small option or structured position on ${N} on ${C}, using at most ${dollars(K*0.1)} (10% of capital); read the maximum loss`,K*0.1*0.0005+g,15,undefined,tx(1)+' + 0.05% venue fee; up to '+dollars(K*0.1)+' premium at risk');
+   add(`Roll the position at expiry once a week on ${N}, keeping the new premium at or below ${dollars(K*0.1)}`, (2*g+K*0.1*0.0005)*w,15*w,'15 min/week',weekly(2,K*0.1*0.0005)+'; replacement premium at risk');
+   add(`Check the ${N} account each week and keep at least 50% of ${dollars(K)} margin unused; log expiry and maximum loss`,0,5*w,'5 min/week');
+  }
+  hold(' with the margin account active; close positions before exit');break;
+ case 'CDP':
+  add(`Deposit ${dollars(K)} of accepted collateral on ${N} on ${C}`,2*g,10);
+  add(`Mint ${N}'s stablecoin against ${dollars(K)} collateral at a collateral ratio of 250% or more; record the borrowing rate`,g,5,undefined,tx(1)+' + variable borrowing interest (not included in estimate)');
+  add(`Put the minted stablecoin in ${N}'s stability or savings pool if it offers one; otherwise retain it for repayment`,2*g,5);
+  add(`Set a liquidation-price alert 20% above liquidation for the ${dollars(K)} collateral on ${N}`,0,5);
+  hold(', then remove the stablecoin from savings, repay the debt and close');break;
+ case 'Chain':
+  add(`Confirm the bridged ${dollars(K)} on ${C} in the wallet and open ${N}'s native DEX or lending app from its ecosystem directory`,0,5);
+  add(`Make 3 transactions a week on ${N}'s native DEX or lending app on ${C}, using $20–50 per transaction`,(3*g+0.30)*w,10*w,'10 min/week',weekly(3,0.30)+'; DEX swaps assume 0.05–0.30%');
+  add(`Use one app deployed only on ${N}: test a $10 deposit and withdraw it on ${C}`,4*g,20);
+  add(`Check the ${dollars(K)} balance and app withdrawal availability on ${N} each week and log transaction hashes`,0,5*w,'5 min/week');
+  hold();break;
  default:
   add(`Test the ${N} app on ${C}: deposit $10 and withdraw it to confirm the exit path`,4*g,20);
   add(`Deposit ${dollars(K)} into the tested ${N} product on ${C} after reading its rules`,2*g,10);
