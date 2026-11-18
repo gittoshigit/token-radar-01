@@ -22,7 +22,9 @@ function parameters(p) {
 }
 function formatStep(step) {
  const suffix=' Cost: '+step.cost+'. Time: '+step.time+'.';
- const trimmed=(step.text.trim().slice(0,600-suffix.length).trim()+suffix).trim();
+ let text=step.text.trim().slice(0,599-suffix.length).trim();
+ if(!text.endsWith('.')) text+='.';
+ const trimmed=(text+suffix).trim();
  return {value:trimmed.padEnd(20,' '),padded:trimmed.length<20};
 }
 function planFor(p) {
@@ -105,7 +107,7 @@ function planFor(p) {
  add(`Before withdrawing the ${dollars(K)} position, check ${N}'s own points or rewards page from the link inside its app, record the wallet, dates and every transaction hash in a log, then withdraw on ${C}`,2*g,15);
  const formatted=steps.map(formatStep);
  return {farm_steps:formatted.map(s=>s.value),padding_used:formatted.some(s=>s.padded),steps,
-  plan:{chain:C,capital_usd:K,fees_usd:steps.reduce((s,x)=>s+x.fee,0),active_minutes:steps.reduce((s,x)=>s+x.minutes,0),hold_days:H}};
+  plan:{chain:C,capital_usd:K,fees_usd:Math.round(steps.reduce((s,x)=>s+x.fee,0)*100)/100,active_minutes:Math.round(steps.reduce((s,x)=>s+x.minutes,0)),hold_days:H}};
 }
 const API={costs,costFor,parameters,formatStep,planFor};
 if (typeof module === 'object' && module.exports) module.exports = API; else
